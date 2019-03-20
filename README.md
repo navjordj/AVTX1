@@ -1,8 +1,12 @@
 # AVTX1
 
-## Gi tillatelse på Ubuntu:
+### Gi tillatelse på Ubuntu:
 
 sudo chmod a+rw /dev/ttyACM0
+
+### Fjernstyre fra ubuntu med ssh:
+
+ssh nvidia@ip-addresse (Begge maskinene må være på IoT, tror ikke det fungerer over Eduroam. Standardpassordet er nvidia)
 
 ## Utstyrsliste
 RPLidar-A1  
