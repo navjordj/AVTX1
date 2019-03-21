@@ -5,8 +5,12 @@
 sudo chmod a+rw /dev/ttyACM0
 
 ### Fjernstyre fra ubuntu med ssh:
+Standarpassord: nvidia
+#### IOT:
+ssh nvidia@10.248.0.101 
+#### Eduroam:
+ssh nvidia@10.243.1.114
 
-ssh ssh nvidia@10.248.0.101 (Begge maskinene må være på IoT, tror ikke det fungerer over Eduroam. Standardpassordet er nvidia)
 
 ## Utstyrsliste
 RPLidar-A1  
