@@ -2,14 +2,18 @@
 
 ### Gi tillatelse på Ubuntu:
 
-sudo chmod a+rw /dev/ttyACM0
+    sudo chmod a+rw /dev/ttyACM0
 
 ### Fjernstyre fra ubuntu med ssh:
-Standarpassord: nvidia
+Standardpassord: nvidia
 #### IOT:
-ssh nvidia@10.248.0.101 
+    ssh nvidia@10.248.0.101 
 #### Eduroam:
-ssh nvidia@10.243.1.114
+    ssh nvidia@10.243.1.114
+
+### Starte lidarvisualisering med ROS
+    cd catkin_ws
+    roslaunch rplidar_ros view_rplidar.launch
 
 
 ## Utstyrsliste
