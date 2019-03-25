@@ -14,8 +14,11 @@ Standardpassord: nvidia
 ### Starte lidarvisualisering med ROS
     cd catkin_ws
     roslaunch rplidar_ros view_rplidar.launch
-
-
+    
+### Kjøre testapplikasjon på Ubuntu
+    cd lidar/sdk/output/Linux/Release
+    sudo ./test_simple
+    
 ## Utstyrsliste
 RPLidar-A1  
 Logitech C720 webcam  
