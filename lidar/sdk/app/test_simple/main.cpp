@@ -23,6 +23,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
+/*
+Applikasjon for å sette oss inn i Lidaren sin API
+*/
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +34,11 @@
 
 
 #include "rplidar.h" //RPLIDAR standard sdk, all-in-one header
+
+#ifndef _countof
+#define _countof(_Array) (int)(sizeof(_Array) / sizeof(_Array[0]))
+#endif
+
 
 using namespace rp::standalone::rplidar;
 using namespace std;
@@ -45,14 +54,28 @@ int main(){
         // TODO
         cout<<"Koblet til! \n";
         lidar->startMotor();
-        usleep(5000000);
-        lidar ->stopMotor();
-        lidar->disconnect();
+        //usleep(5000000);
+        RplidarScanMode scanMode;
+        lidar->startScan(false, true, 0, &scanMode);
+
+        rplidar_response_measurement_node_t nodes[8192];
+        size_t   count = _countof(nodes);
+
+        res = lidar->ascendScanData(nodes, count);
+
+        if (IS_FAIL(res))
+        {
+            // failed to get scan data
+        }
+
     }
     else
     {
         fprintf(stderr, "Failed to connect to LIDAR %08x\r\n", res);
     }
 
+    cout<<"Kobler fra \n";
+    lidar ->stopMotor();
+    lidar->disconnect();
     return 0;
 }
