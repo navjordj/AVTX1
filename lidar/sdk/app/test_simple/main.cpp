@@ -1,39 +1,14 @@
-/*
- *  RPLIDAR
- *  Ultra Simple Data Grabber Demo App
- *
- *  Copyright (c) 2009 - 2014 RoboPeak Team
- *  http://www.robopeak.com
- *  Copyright (c) 2014 - 2019 Shanghai Slamtec Co., Ltd.
- *  http://www.slamtec.com
- *
- */
-/*
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
-/*
-Applikasjon for å sette oss inn i Lidaren sin API
-*/
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <vector>
+#include <iostream>
+#include <fstream>
 
 
-#include "rplidar.h" //RPLIDAR standard sdk, all-in-one header
+
+#include "rplidar.h"
 
 #ifndef _countof
 #define _countof(_Array) (int)(sizeof(_Array) / sizeof(_Array[0]))
@@ -46,6 +21,9 @@ using namespace std;
 int main(){
 
     RPlidarDriver* lidar = RPlidarDriver::CreateDriver();
+
+    vector<float> thetas;
+    vector<float> dists;
 
     u_result res = lidar->connect("/dev/ttyUSB0", 115200);
 
@@ -64,11 +42,31 @@ int main(){
         if (IS_OK(res)) {
             lidar->ascendScanData(nodes, count);
             for (int pos = 0; pos < (int)count ; ++pos) {
-                printf("%s theta: %03.2f Dist: %08.2f \n", 
-                    (nodes[pos].sync_quality & RPLIDAR_RESP_MEASUREMENT_SYNCBIT) ?"S ":"  ", 
+
+                float theta = (nodes[pos].angle_q6_checkbit >> RPLIDAR_RESP_MEASUREMENT_ANGLE_SHIFT)/64.0f;
+                thetas.push_back(theta);
+                
+                float dist = nodes[pos].distance_q2/4.0f;
+                dists.push_back(dist);
+
+                //cout<<theta << '\t' << dist << '\n';
+
+                /*printf("theta: %03.2f Dist: %08.2f \n",  
                     (nodes[pos].angle_q6_checkbit >> RPLIDAR_RESP_MEASUREMENT_ANGLE_SHIFT)/64.0f,
-                    nodes[pos].distance_q2/4.0f);
+                    nodes[pos].distance_q2/4.0f);*/
             }
+        ofstream myfile;
+        myfile.open ("points.txt");
+
+        for (size_t i; i < thetas.size(); i++){
+            myfile << thetas[i];
+            myfile << " ";
+            myfile << dists[i];
+            myfile << "\n";
+        }
+
+        myfile.close();
+
         }
     }
     else {

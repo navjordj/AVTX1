@@ -1,3 +1,6 @@
 {
-    "python.pythonPath": "/home/jorgen/anaconda3/bin/python"
+    "python.pythonPath": "/home/jorgen/anaconda3/bin/python",
+    "files.associations": {
+        "fstream": "cpp"
+    }
 }

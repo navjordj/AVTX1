@@ -3,4 +3,4 @@
 *.json
 
 output/
-lidar/sdk/output/
+lidar/sdk/output/Linux/Release
