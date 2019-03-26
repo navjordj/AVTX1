@@ -10,8 +10,6 @@ def parse_data(file):
     r = []
     try:
         with open(file) as f:
-            for _ in range(3): #Skipper over de 3 første linjene som ikke inneholder verdier
-                next(f)
             for row in f:
                 rad = row.split(' ')
                 theta.append(math.radians(float(rad[0])))
@@ -27,9 +25,9 @@ def plot_values(values):
     plt.show()
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Ingen fil oppgitt")
-        sys.exit()
-    FILE = sys.argv[1]
+    if len(sys.argv) == 1:
+        FILE = '../lidar/sdk/output/Linux/Release/points.txt'
+    else:
+        FILE = sys.argv[1]
     values = parse_data(FILE)
     plot_values(values)
