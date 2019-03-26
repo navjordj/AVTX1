@@ -1,0 +1,6 @@
+*.ipch
+*.bin
+*.json
+
+output/
+lidar/sdk/output/

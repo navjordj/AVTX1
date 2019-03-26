@@ -49,8 +49,7 @@ int main(){
 
     u_result res = lidar->connect("/dev/ttyUSB0", 115200);
 
-    if (IS_OK(res))
-    {
+    if (IS_OK(res)) {
         // TODO
         cout<<"Koblet til! \n";
         lidar->startMotor();
@@ -59,18 +58,20 @@ int main(){
         lidar->startScan(false, true, 0, &scanMode);
 
         rplidar_response_measurement_node_t nodes[8192];
-        size_t   count = _countof(nodes);
+        size_t count = _countof(nodes);
 
-        res = lidar->ascendScanData(nodes, count);
-
-        if (IS_FAIL(res))
-        {
-            // failed to get scan data
+        res = lidar->grabScanData(nodes, count);
+        if (IS_OK(res)) {
+            lidar->ascendScanData(nodes, count);
+            for (int pos = 0; pos < (int)count ; ++pos) {
+                printf("%s theta: %03.2f Dist: %08.2f \n", 
+                    (nodes[pos].sync_quality & RPLIDAR_RESP_MEASUREMENT_SYNCBIT) ?"S ":"  ", 
+                    (nodes[pos].angle_q6_checkbit >> RPLIDAR_RESP_MEASUREMENT_ANGLE_SHIFT)/64.0f,
+                    nodes[pos].distance_q2/4.0f);
+            }
         }
-
     }
-    else
-    {
+    else {
         fprintf(stderr, "Failed to connect to LIDAR %08x\r\n", res);
     }
 
