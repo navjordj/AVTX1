@@ -19,6 +19,10 @@ Standardpassord: nvidia
     cd lidar/sdk/output/Linux/Release
     sudo ./test_simple
     
+### Visualisere lidardata med matplotlob
+    cd visualizor
+    python vizualize_data.py points.txt
+    
 ## Utstyrsliste
 RPLidar-A1  
 Logitech C720 webcam  
