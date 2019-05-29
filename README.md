@@ -19,7 +19,7 @@ Standardpassord: nvidia
     cd lidar/sdk/output/Linux/Release
     sudo ./test_simple
     
-### Visualisere lidardata med matplotlob
+### Visualisere lidardata med matplotlib
     cd visualizor
     python vizualize_data.py points.txt
     
