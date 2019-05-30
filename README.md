@@ -10,7 +10,15 @@ Standardpassord: nvidia
     ssh nvidia@10.248.0.101 
 #### Eduroam:
     ssh nvidia@10.243.1.114
-
+    
+### Fjernstyre Jetson Nano med ssh:
+Standardpassord: nvidia
+#### Eduroam:
+    ssh eik@128.39.234.208
+### Fjernstyre Jetson nano med VNC:
+    Standardpassord: nvidia
+    Bruker vnc-viewer:
+    eik@128.39.234.208
 ### Starte lidarvisualisering med ROS
     cd catkin_ws
     roslaunch rplidar_ros view_rplidar.launch
