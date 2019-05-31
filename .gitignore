@@ -2,5 +2,4 @@
 *.bin
 *.json
 
-output/
-lidar/sdk/output/Linux/Release
+lidar/sdk/output/
