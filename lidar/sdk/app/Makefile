@@ -19,7 +19,7 @@
 #
 HOME_TREE := ../
 
-MAKE_TARGETS :=  test_simple
+MAKE_TARGETS :=  test_simple get_points
 
 include $(HOME_TREE)/mak_def.inc
 
