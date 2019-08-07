@@ -51,6 +51,6 @@ for i, scan in enumerate(lidar.iter_scans(max_buf_meas=500)):
         else:
             arduino.write(str.encode("1"))
             print("hoyre")
-            #sving til høyre
+            #sving til hoyre
         print(steer)
         time.sleep(0)
