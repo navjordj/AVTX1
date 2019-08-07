@@ -1,7 +1,6 @@
 from rplidar import RPLidar
 
 import numpy as np 
-import keyboard
 import sys
 
 lidar = RPLidar('/dev/ttyUSB0')
